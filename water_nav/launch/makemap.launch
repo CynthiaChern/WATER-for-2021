@@ -1,0 +1,19 @@
+<!-- 建图launch文件 -->
+<launch>
+    <!-- 使能gmapping -->
+    <!--node name="slam_gmapping" pkg="slam_gmapping" type="slam_gmapping" args="-d $(find slam_gmapping)/gmapping/src/slam_gmapping.cpp"/-->
+    
+    <!-- 使能move_base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find water_nav)/cfg/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find water_nav)/cfg/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find water_nav)/cfg/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find water_nav)/cfg/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find water_nav)/cfg/base_local_planner_params.yaml" command="load" />
+    </node>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find water_nav)/cfg/rviz_navigation.rviz"/>
+    <!--键盘控制-->
+    <node name="pub" pkg="walk" type="pub" args="-d $(find walk)/src/pub.cpp"/>
+    <!--node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard" args="-d $(find teleop_twist_keyboard)/teleop_twist_keyboard.py"/-->
+</launch>
