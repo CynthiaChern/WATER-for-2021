@@ -3,7 +3,9 @@ Code for Intelligent Engineering Experiment on WATER(two wheeled differential ro
 ## real action of water
 ## Gmapping
 rosrun gmapping slam_gmapping
+
 roslaunch water_nav makemap_launch
+
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
 ## Navigation
